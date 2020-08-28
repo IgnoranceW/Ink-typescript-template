@@ -1,0 +1,47 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "log": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.nodePath": "./node_modules",
+  "eslint.enable": true,
+  "eslint.run": "onType",
+  "eslint.options": {
+    "rules": {
+      "no-debugger": "off"
+    }
+  },
+  "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "prettier.disableLanguages": ["javascript", "javascriptreact", "typescript", "typescriptreact", "jsonc"],
+  "prettier.trailingComma": "all",
+  "prettier.printWidth": 80,
+  "prettier.semi": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.bracketSpacing": true,
+  "prettier.jsxBracketSameLine": true,
+  "json.format.enable": true,
+  "[json]": {
+    "editor.tabSize": 2,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.tabSize": 2,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
+  }
+}

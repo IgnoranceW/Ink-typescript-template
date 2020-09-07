@@ -1,53 +1,55 @@
+# Ink 官方文档翻译
+
 <h1 align="center">
-	<br>
-	<br>
-	<img width="200" alt="Ink" src="media/logo.png">
-	<br>
-	<br>
-	<br>
+  <br>
+  <br>
+  <img width="200" alt="Ink" src="media/logo.png">
+  <br>
+  <br>
+  <br>
 </h1>
 
-> 用 `React` 书写CLI. 使用组件构建和测试你的CLI工具.
+> 用 React 书写 CLI. 使用组件构建和测试你的 CLI 工具.
 
 [![Build Status](https://github.com/vadimdemedes/ink/workflows/test/badge.svg)](https://github.com/vadimdemedes/ink/actions)
 [![npm](https://img.shields.io/npm/dm/ink?logo=npm)](https://npmjs.com/package/ink)
 
-`Ink` 提供了与在浏览器中使用 `React` 一样的基于组件构建UI的开发体验。
-`Ink` 使用了 [Yoga](https://github.com/facebook/yoga) 在终端中搭建 `FLexbox` 布局, 所以大部分 `CSS-like` 的参数在 `Ink` 中也能使用。
-如果你对 `React` 熟悉，那你也应该了解如何使用 `Ink` 。
+Ink 提供了与在浏览器中使用 React 一样的基于组件构建 UI 的开发体验。
+Ink 使用了 [Yoga](https://github.com/facebook/yoga) 在终端中搭建 `FLexbox` 布局, 所以大部分 `CSS-like` 的参数在 Ink 中也能使用。
+如果你对 React 熟悉，那你也应该了解如何使用 Ink 。
 
-`Ink` 一 `React` 染器，意味着所 `React` 功能都能够支持。
+Ink 一 React 染器，意味着所 React 功能都能够支持。
 请前往 [React](https://reactjs.org) 的官方网站查看使用它的文档。
-只 `Ink` 方法会在本 Readme 中被提及。
+只 Ink 方法会在本 Readme 中被提及。
 
 **注意：** 这 `Ink3` 文档。 如果你在寻 `Ink2` 文档, 请查看 [这个版本](https://github.com/vadimdemedes/ink/tree/v2.7.1)。 同时，`Ink2` 到 `Ink3`的 [迁移指南](migrate.md) 请查看这里。
 
 ## 安装
 
-```
+```shell
 $ npm install ink react
 ```
 
 ## 用例
 
 ```jsx
-import React, {useState, useEffect} from 'react';
-import {render, Text} from 'ink';
+import React, { useState, useEffect } from 'react';
+import { render, Text } from 'ink';
 
 const Counter = () => {
-	const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
 
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setCounter(previousCounter => previousCounter + 1);
-		}, 100);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCounter((previousCounter) => previousCounter + 1);
+    }, 100);
 
-		return () => {
-			clearInterval(timer);
-		};
-	}, []);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
-	return <Text color="green">{counter} tests passed</Text>;
+  return <Text color="green">{counter} tests passed</Text>;
 };
 
 render(<Counter />);
@@ -58,7 +60,7 @@ render(<Counter />);
 你也可以在 [这里](https://ink-counter-demo.vadimdemedes.repl.run/) 实时查看。
 随意尝试更改代码，并可以在 [这里](https://repl.it/@vadimdemedes/ink-counter-demo) 获得 `fork` 分支。
 
-## 谁在使用Ink?
+## 谁在使用 Ink?
 
 - [Gatsby](https://www.gatsbyjs.org) - Gatsby is a modern web framework for blazing fast websites.
 - [Parcel](https://parceljs.org) - Blazing fast, zero configuration web application bundler.
@@ -109,14 +111,14 @@ render(<Counter />);
   - [`useFocusManager`](#usefocusmanager)
 - [API](#api)
 - [测试](#testing)
-- [使用React开发工具](#using-react-devtools)
+- [使用 React 开发工具](#using-react-devtools)
 - [有用的组件](#useful-components)
-- [有用的Hooks](#useful-hooks)
+- [有用的 Hooks](#useful-hooks)
 - [用例](#examples)
 
 ## 快速开始
 
-使用 [create-ink-app](https://github.com/vadimdemedes/create-ink-app) 来快速搭建一个基 `Ink` CLI.
+使用 [create-ink-app](https://github.com/vadimdemedes/create-ink-app) 来快速搭建一个基 Ink CLI.
 
 ```
 $ mkdir my-ink-cli
@@ -127,9 +129,9 @@ $ npx create-ink-app
 <details><summary>手动设定</summary>
 <p>
 
-`Ink` 要使用与在浏览器中运行 `React` 用相同的 `Babel` 配置。
+Ink 要使用与在浏览器中运行 React 用相同的 `Babel` 配置。
 
-使 `React` 设配置设置 `Babel` ，来确保本 readme 中所有的示例都能够按照预期工作。
+使 React 设配置设置 `Babel` ，来确保本 readme 中所有的示例都能够按照预期工作。
 在 [安装 Babel](https://babeljs.io/docs/en/usage) 之后, 安装 `@babel/preset-react` 并将下述配置添加到 `babel.config.json` 中:
 
 ```
@@ -138,32 +140,32 @@ $ npm install --save-dev @babel/preset-react
 
 ```json
 {
-	"presets": [
-		"@babel/preset-react",
-		[
-			"@babel/preset-env",
-			{
-				"targets": {
-					"node": true
-				}
-			}
-		]
-	]
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": true
+        }
+      }
+    ]
+  ]
 }
 ```
 
-接着，创建文件 `source.js`, 在其中你可以使 `Ink` 写代码:
+接着，创建文件 `source.js`, 在其中你可以使 Ink 写代码:
 
 ```jsx
 import React from 'react';
-import {render, Text} from 'ink';
+import { render, Text } from 'ink';
 
 const Demo = () => <Text>Hello World</Text>;
 
 render(<Demo />);
 ```
 
-然后，使用Babel编译文件:
+然后，使用 Babel 编译文件:
 
 ```
 $ npx babel source.js -o cli.js
@@ -180,11 +182,11 @@ $ node cli
 </p>
 </details>
 
-`Ink` 使用 [Yoga](https://github.com/facebook/yoga) - 一个 `Flexbox` 布局引擎，让你可以使用在浏览器中构建应用程序时所使用的CSS样式工具，为CLI构建出色的用户界面。
-需要记住的是，每一个元素都是一个`Flexbox`容器。
+Ink 使用 [Yoga](https://github.com/facebook/yoga) - 一个 FLexbox 布局引擎，让你可以使用在浏览器中构建应用程序时所使用的 CSS 样式工具，为 CLI 构建出色的用户界面。
+需要记住的是，每一个元素都是一个 FLexbox 容器。
 你可以把它们当作浏览器中拥有样式 `display: flex` 的 `<div>` 。
-关于如何 `Ink` 使用`Flexbox`布局，可以参考内置组件 [`<Box>`](#box) 。
-请注意⚠️，所有文本都必须使用组件 [`<Text>`](#text) 包装。
+关于如何 Ink 使用 FLexbox 布局，可以参考内置组件 [`<Box>`](#box) 。
+请注意 ⚠️，所有文本都必须使用组件 [`<Text>`](#text) 包装。
 
 ## 组件
 
@@ -193,21 +195,21 @@ $ node cli
 该组件用于显示文本，并可以更改其样式，以使其变为粗体、斜体或具有下划线、删除线。
 
 ```jsx
-import {render, Text} from 'ink';
+import { render, Text } from 'ink';
 
 const Example = () => (
-	<>
-		<Text color="green">I am green</Text>
-		<Text color="black" backgroundColor="white">
-			I am black on white
-		</Text>
-		<Text color="#ffffff">I am white</Text>
-		<Text bold>I am bold</Text>
-		<Text italic>I am italic</Text>
-		<Text underline>I am underline</Text>
-		<Text strikethrough>I am strikethrough</Text>
-		<Text inverse>I am inversed</Text>
-	</>
+  <>
+    <Text color="green">I am green</Text>
+    <Text color="black" backgroundColor="white">
+      I am black on white
+    </Text>
+    <Text color="#ffffff">I am white</Text>
+    <Text bold>I am bold</Text>
+    <Text italic>I am italic</Text>
+    <Text underline>I am underline</Text>
+    <Text strikethrough>I am strikethrough</Text>
+    <Text inverse>I am inversed</Text>
+  </>
 );
 
 render(<Example />);
@@ -253,7 +255,7 @@ Default: `false`
 
 ```jsx
 <Text color="red" dimColor>
-	Dimmed Red
+  Dimmed Red
 </Text>
 ```
 
@@ -296,7 +298,7 @@ Default: `false`
 
 ```jsx
 <Text inverse color="yellow">
-	Inversed Yellow
+  Inversed Yellow
 </Text>
 ```
 
@@ -308,29 +310,29 @@ Type: `string`\
 Allowed values: `wrap` `truncate` `truncate-start` `truncate-middle` `truncate-end`\
 Default: `wrap`
 
-该属性决定当Text的宽度大于容器的宽度时，使用包裹或是截断处理文本内容。
+该属性决定当 Text 的宽度大于容器的宽度时，使用包裹或是截断处理文本内容。
 如果设置的是`wrap`（同时也是默认值）， Ink 将换行并将文本拆分成多行。
 如果设置的是 `truncate-*` ， Ink 将改为截断文本，只显示部分内容，设置中被截断的部分将被截断。
 
 ```jsx
 <Box width={7}>
-	<Text>Hello World</Text>
+  <Text>Hello World</Text>
 </Box>
 //=> 'Hello\nWorld'
 
 // `truncate` is an alias to `truncate-end`
 <Box width={7}>
-	<Text wrap="truncate">Hello World</Text>
+  <Text wrap="truncate">Hello World</Text>
 </Box>
 //=> 'Hello…'
 
 <Box width={7}>
-	<Text wrap="truncate-middle">Hello World</Text>
+  <Text wrap="truncate-middle">Hello World</Text>
 </Box>
 //=> 'He…ld'
 
 <Box width={7}>
-	<Text wrap="truncate-start">Hello World</Text>
+  <Text wrap="truncate-start">Hello World</Text>
 </Box>
 //=> '…World'
 ```
@@ -341,12 +343,12 @@ Default: `wrap`
 它于浏览器中的 `<div style="display: flex">` 是类似的。
 
 ```jsx
-import {render, Box, Text} from 'ink';
+import { render, Box, Text } from 'ink';
 
 const Example = () => {
-	<Box margin={2}>
-		<Text>This is a box with margin</Text>
-	</Box>;
+  <Box margin={2}>
+    <Text>This is a box with margin</Text>
+  </Box>;
 };
 
 render(<Example />);
@@ -363,17 +365,17 @@ Type: `number` `string`
 
 ```jsx
 <Box width={4}>
-	<Text>X</Text>
+  <Text>X</Text>
 </Box>
 //=> 'X   '
 ```
 
 ```jsx
 <Box width={10}>
-	<Box width="50%">
-		<Text>X</Text>
-	</Box>
-	<Text>Y</Text>
+  <Box width="50%">
+    <Text>X</Text>
+  </Box>
+  <Text>Y</Text>
 </Box>
 //=> 'X    Y'
 ```
@@ -387,17 +389,17 @@ Type: `number` `string`
 
 ```jsx
 <Box height={4}>
-	<Text>X</Text>
+  <Text>X</Text>
 </Box>
 //=> 'X\n\n\n'
 ```
 
 ```jsx
 <Box height={6} flexDirection="column">
-	<Box height="50%">
-		<Text>X</Text>
-	</Box>
-	<Text>Y</Text>
+  <Box height="50%">
+    <Text>X</Text>
+  </Box>
+  <Text>Y</Text>
 </Box>
 //=> 'X\n\n\nY\n\n'
 ```
@@ -549,10 +551,10 @@ See [flex-grow](https://css-tricks.com/almanac/properties/f/flex-grow/).
 
 ```jsx
 <Box>
-	<Text>Label:</Text>
-	<Box flexGrow={1}>
-		<Text>Fills all remaining space</Text>
-	</Box>
+  <Text>Label:</Text>
+  <Box flexGrow={1}>
+    <Text>Fills all remaining space</Text>
+  </Box>
 </Box>
 ```
 
@@ -565,12 +567,12 @@ Default: `1`
 
 ```jsx
 <Box width={20}>
-	<Box flexShrink={2} width={10}>
-		<Text>Will be 1/4</Text>
-	</Box>
-	<Box width={10}>
-		<Text>Will be 3/4</Text>
-	</Box>
+  <Box flexShrink={2} width={10}>
+    <Text>Will be 1/4</Text>
+  </Box>
+  <Box width={10}>
+    <Text>Will be 3/4</Text>
+  </Box>
 </Box>
 ```
 
@@ -582,20 +584,20 @@ Type: `number` `string`
 
 ```jsx
 <Box width={6}>
-	<Box flexBasis={3}>
-		<Text>X</Text>
-	</Box>
-	<Text>Y</Text>
+  <Box flexBasis={3}>
+    <Text>X</Text>
+  </Box>
+  <Text>Y</Text>
 </Box>
 //=> 'X  Y'
 ```
 
 ```jsx
 <Box width={6}>
-	<Box flexBasis="50%">
-		<Text>X</Text>
-	</Box>
-	<Text>Y</Text>
+  <Box flexBasis="50%">
+    <Text>X</Text>
+  </Box>
+  <Text>Y</Text>
 </Box>
 //=> 'X  Y'
 ```
@@ -609,31 +611,31 @@ Allowed values: `row` `row-reverse` `column` `column-reverse`
 
 ```jsx
 <Box>
-	<Box marginRight={1}>
-		<Text>X</Text>
-	</Box>
-	<Text>Y</Text>
+  <Box marginRight={1}>
+    <Text>X</Text>
+  </Box>
+  <Text>Y</Text>
 </Box>
 // X Y
 
 <Box flexDirection="row-reverse">
-	<Text>X</Text>
-	<Box marginRight={1}>
-		<Text>Y</Text>
-	</Box>
+  <Text>X</Text>
+  <Box marginRight={1}>
+    <Text>Y</Text>
+  </Box>
 </Box>
 // Y X
 
 <Box flexDirection="column">
-	<Text>X</Text>
-	<Text>Y</Text>
+  <Text>X</Text>
+  <Text>Y</Text>
 </Box>
 // X
 // Y
 
 <Box flexDirection="column-reverse">
-	<Text>X</Text>
-	<Text>Y</Text>
+  <Text>X</Text>
+  <Text>Y</Text>
 </Box>
 // Y
 // X
@@ -648,48 +650,48 @@ Allowed values: `flex-start` `center` `flex-end`
 
 ```jsx
 <Box alignItems="flex-start">
-	<Box marginRight={1}>
-		<Text>X</Text>
-	</Box>
-	<Text>
-		A
-		<Newline/>
-		B
-		<Newline/>
-		C
-	</Text>
+  <Box marginRight={1}>
+    <Text>X</Text>
+  </Box>
+  <Text>
+    A
+    <Newline/>
+    B
+    <Newline/>
+    C
+  </Text>
 </Box>
 // X A
 //   B
 //   C
 
 <Box alignItems="center">
-	<Box marginRight={1}>
-		<Text>X</Text>
-	</Box>
-	<Text>
-		A
-		<Newline/>
-		B
-		<Newline/>
-		C
-	</Text>
+  <Box marginRight={1}>
+    <Text>X</Text>
+  </Box>
+  <Text>
+    A
+    <Newline/>
+    B
+    <Newline/>
+    C
+  </Text>
 </Box>
 //   A
 // X B
 //   C
 
 <Box alignItems="flex-end">
-	<Box marginRight={1}>
-		<Text>X</Text>
-	</Box>
-	<Text>
-		A
-		<Newline/>
-		B
-		<Newline/>
-		C
-	</Text>
+  <Box marginRight={1}>
+    <Text>X</Text>
+  </Box>
+  <Text>
+    A
+    <Newline/>
+    B
+    <Newline/>
+    C
+  </Text>
 </Box>
 //   A
 //   B
@@ -706,27 +708,27 @@ Allowed vales: `auto` `flex-start` `center` `flex-end`
 
 ```jsx
 <Box height={3}>
-	<Box alignSelf="flex-start">
-		<Text>X</Text>
-	</Box>
+  <Box alignSelf="flex-start">
+    <Text>X</Text>
+  </Box>
 </Box>
 // X
 //
 //
 
 <Box height={3}>
-	<Box alignSelf="center">
-		<Text>X</Text>
-	</Box>
+  <Box alignSelf="center">
+    <Text>X</Text>
+  </Box>
 </Box>
 //
 // X
 //
 
 <Box height={3}>
-	<Box alignSelf="flex-end">
-		<Text>X</Text>
-	</Box>
+  <Box alignSelf="flex-end">
+    <Text>X</Text>
+  </Box>
 </Box>
 //
 //
@@ -742,29 +744,29 @@ Allowed values: `flex-start` `center` `flex-end` `space-between` `space-around`
 
 ```jsx
 <Box justifyContent="flex-start">
-	<Text>X</Text>
+  <Text>X</Text>
 </Box>
 // [X      ]
 
 <Box justifyContent="center">
-	<Text>X</Text>
+  <Text>X</Text>
 </Box>
 // [   X   ]
 
 <Box justifyContent="flex-end">
-	<Text>X</Text>
+  <Text>X</Text>
 </Box>
 // [      X]
 
 <Box justifyContent="space-between">
-	<Text>X</Text>
-	<Text>Y</Text>
+  <Text>X</Text>
+  <Text>Y</Text>
 </Box>
 // [X      Y]
 
 <Box justifyContent="space-around">
-	<Text>X</Text>
-	<Text>Y</Text>
+  <Text>X</Text>
+  <Text>Y</Text>
 </Box>
 // [  X   Y  ]
 ```
@@ -792,37 +794,37 @@ Ink 从 [`cli-boxes`](https://github.com/sindresorhus/cli-boxes) 模块中获取
 
 ```jsx
 <Box flexDirection="column">
-	<Box>
-		<Box borderStyle="single" marginRight={2}>
-			<Text>single</Text>
-		</Box>
+  <Box>
+    <Box borderStyle="single" marginRight={2}>
+      <Text>single</Text>
+    </Box>
 
-		<Box borderStyle="double" marginRight={2}>
-			<Text>double</Text>
-		</Box>
+    <Box borderStyle="double" marginRight={2}>
+      <Text>double</Text>
+    </Box>
 
-		<Box borderStyle="round" marginRight={2}>
-			<Text>round</Text>
-		</Box>
+    <Box borderStyle="round" marginRight={2}>
+      <Text>round</Text>
+    </Box>
 
-		<Box borderStyle="bold">
-			<Text>bold</Text>
-		</Box>
-	</Box>
+    <Box borderStyle="bold">
+      <Text>bold</Text>
+    </Box>
+  </Box>
 
-	<Box marginTop={1}>
-		<Box borderStyle="singleDouble" marginRight={2}>
-			<Text>singleDouble</Text>
-		</Box>
+  <Box marginTop={1}>
+    <Box borderStyle="singleDouble" marginRight={2}>
+      <Text>singleDouble</Text>
+    </Box>
 
-		<Box borderStyle="doubleSingle" marginRight={2}>
-			<Text>doubleSingle</Text>
-		</Box>
+    <Box borderStyle="doubleSingle" marginRight={2}>
+      <Text>doubleSingle</Text>
+    </Box>
 
-		<Box borderStyle="classic">
-			<Text>classic</Text>
-		</Box>
-	</Box>
+    <Box borderStyle="classic">
+      <Text>classic</Text>
+    </Box>
+  </Box>
 </Box>
 ```
 
@@ -839,7 +841,7 @@ Type: `string`
 
 ```jsx
 <Box borderStyle="round" borderColor="green">
-	<Text>Green Rounded Box</Text>
+  <Text>Green Rounded Box</Text>
 </Box>
 ```
 
@@ -858,14 +860,14 @@ Default: `1`
 添加的空白行的数量。
 
 ```jsx
-import {render, Text, Newline} from 'ink';
+import { render, Text, Newline } from 'ink';
 
 const Example = () => (
-	<Text>
-		<Text color="green">Hello</Text>
-		<Newline />
-		<Text color="red">World</Text>
-	</Text>
+  <Text>
+    <Text color="green">Hello</Text>
+    <Newline />
+    <Text color="red">World</Text>
+  </Text>
 );
 
 render(<Example />);
@@ -873,7 +875,7 @@ render(<Example />);
 
 Output:
 
-```
+```shell
 Hello
 World
 ```
@@ -886,14 +888,14 @@ World
 例如，在一个采用了默认`flex-direction`(`row`)的`<Box>`中使用`<Spacer>`会将"Left"放在容器左侧，"Right"推到容器右侧。
 
 ```jsx
-import {render, Box, Text, Spacer} from 'ink';
+import { render, Box, Text, Spacer } from 'ink';
 
 const Example = () => (
-	<Box>
-		<Text>Left</Text>
-		<Spacer />
-		<Text>Right</Text>
-	</Box>
+  <Box>
+    <Text>Left</Text>
+    <Spacer />
+    <Text>Right</Text>
+  </Box>
 );
 
 render(<Example />);
@@ -902,14 +904,14 @@ render(<Example />);
 在一个采用了`flex-direction: column`的`<Box>`中使用`<Spacer>`会将"Top"放置在容器顶部，"Bottom"推到容器底部。请注意，容器必须足够高才能够生效。
 
 ```jsx
-import {render, Box, Text, Spacer} from 'ink';
+import { render, Box, Text, Spacer } from 'ink';
 
 const Example = () => (
-	<Box flexDirection="column" height={10}>
-		<Text>Top</Text>
-		<Spacer />
-		<Text>Bottom</Text>
-	</Box>
+  <Box flexDirection="column" height={10}>
+    <Text>Top</Text>
+    <Spacer />
+    <Text>Bottom</Text>
+  </Box>
 );
 
 render(<Example />);
@@ -926,55 +928,55 @@ render(<Example />);
 [Gatsby](https://github.com/gatsbyjs/gatsby) 用它来显示已经生成页面的列表，同时仍显示实时进度栏。
 
 ```jsx
-import React, {useState, useEffect} from 'react';
-import {render, Static, Box, Text} from 'ink';
+import React, { useState, useEffect } from 'react';
+import { render, Static, Box, Text } from 'ink';
 
 const Example = () => {
-	const [tests, setTests] = useState([]);
+  const [tests, setTests] = useState([]);
 
-	useEffect(() => {
-		let completedTests = 0;
-		let timer;
+  useEffect(() => {
+    let completedTests = 0;
+    let timer;
 
-		const run = () => {
-			// Fake 10 completed tests
-			if (completedTests++ < 10) {
-				setTests(previousTests => [
-					...previousTests,
-					{
-						id: previousTests.length,
-						title: `Test #${previousTests.length + 1}`
-					}
-				]);
+    const run = () => {
+      // Fake 10 completed tests
+      if (completedTests++ < 10) {
+        setTests((previousTests) => [
+          ...previousTests,
+          {
+            id: previousTests.length,
+            title: `Test #${previousTests.length + 1}`,
+          },
+        ]);
 
-				setTimeout(run, 100);
-			}
-		};
+        setTimeout(run, 100);
+      }
+    };
 
-		run();
+    run();
 
-		return () => {
-			clearTimeout(timer);
-		};
-	}, []);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
-	return (
-		<>
-			{/* This part will be rendered once to the terminal */}
-			<Static items={tests}>
-				{test => (
-					<Box key={test.id}>
-						<Text color="green">✔ {test.title}</Text>
-					</Box>
-				)}
-			</Static>
+  return (
+    <>
+      {/* This part will be rendered once to the terminal */}
+      <Static items={tests}>
+        {(test) => (
+          <Box key={test.id}>
+            <Text color="green">✔ {test.title}</Text>
+          </Box>
+        )}
+      </Static>
 
-			{/* This part keeps updating as state changes */}
-			<Box marginTop={1}>
-				<Text dimColor>Completed tests: {tests.length}</Text>
-			</Box>
-		</>
-	);
+      {/* This part keeps updating as state changes */}
+      <Box marginTop={1}>
+        <Text dimColor>Completed tests: {tests.length}</Text>
+      </Box>
+    </>
+  );
 };
 
 render(<Example />);
@@ -989,107 +991,106 @@ See [examples/static](examples/static/static.js) for an example usage of `<Stati
 
 Type: `Array`
 
-Array of items of any type to render using a function you pass as a component child.
+任意类型的数据组成的数组，这些数据将作为参数传入生成子组件的函数中。
 
 #### style
 
 Type: `object`
 
-Styles to apply to a container of child elements.
-See [`<Box>`](#box) for supported properties.
+应用于装载子元素的容器的样式。
+查看 [`<Box>`](#box) 了解支持的属性。
 
 ```jsx
 <Static items={...} style={{padding: 1}}>
-	{...}
+  {...}
 </Static>
 ```
 
-#### children(item)
+#### children(item, index)
 
 Type: `Function`
 
-Function that is called to render every item in `items` array.
-First argument is an item itself and second argument is index of that item in
-`items` array.
+调用该函数来渲染 `item` 数组中的数据。
+第一个参数是 `item` 本身，第二个参数是 `item` 在数组中的索引值。
 
-Note that `key` must be assigned to the root component.
+注意： `key` 必须分配给根组件。
 
 ```jsx
 <Static items={['a', 'b', 'c']}>
-	{(item, index) => {
-		// This function is called for every item in ['a', 'b', 'c']
-		// `item` is 'a', 'b', 'c'
-		// `index` is 0, 1, 2
-		return (
-			<Box key={index}>
-				<Text>Item: {item}</Text>
-			</Box>
-		);
-	}}
+  {(item, index) => {
+    // This function is called for every item in ['a', 'b', 'c']
+    // `item` is 'a', 'b', 'c'
+    // `index` is 0, 1, 2
+    return (
+      <Box key={index}>
+        <Text>Item: {item}</Text>
+      </Box>
+    );
+  }}
 </Static>
 ```
 
 ### `<Transform>`
 
-Transform a string representation of React components before they are written to output.
-For example, you might want to apply a [gradient to text](https://github.com/sindresorhus/ink-gradient), [add a clickable link](https://github.com/sindresorhus/ink-link) or [create some text effects](https://github.com/sindresorhus/ink-big-text).
-These use cases can't accept React nodes as input, they are expecting a string.
-That's what `<Transform>` component does, it gives you an output string of its child components and lets you transform it in any way.
+在将 React 组件写入输出之前，先对其进行字符串转换。
+例如，你可能想为文本添加 [渐变效果](https://github.com/sindresorhus/ink-gradient), [添加链接](https://github.com/sindresorhus/ink-link) 或者 [创建一些文本效果](https://github.com/sindresorhus/ink-big-text).
+这些用例不能接受 `ReactNode` 作为输入，只能够接受纯文本。
+这就是 `<Transform>` 组件的作用， 它为你提供其子组件的输出字符串，并允许你使用任何方式进行转换。
 
-**Note:** `<Transform>` must be applied only to `<Text>` children components and shouldn't change the dimensions of the output, otherwise layout will be incorrect.
+**注意：** `<Transform>` 只能使用 `<Text>` 作为子组件，且不应该更改输出的尺寸，否则将会导致布局错误。
 
 ```jsx
-import {render, Transform} from 'ink';
+import { render, Transform } from 'ink';
 
 const Example = () => (
-	<Transform transform={output => output.toUpperCase()}>
-		<Text>Hello World</Text>
-	</Transform>
+  <Transform transform={(output) => output.toUpperCase()}>
+    <Text>Hello World</Text>
+  </Transform>
 );
 
 render(<Example />);
 ```
 
-Since `transform` function converts all characters to upper case, final output that's rendered to the terminal will be "HELLO WORLD", not "Hello World".
+由于 `transform` 函数将所有字符转换为大写，因此呈现给终端的最终输出将是"HELLO WORLD"，而不是"Hello World"。
 
 #### transform(children)
 
 Type: `Function`
 
-Function which transforms children output.
-It accepts children and must return transformed children too.
+改变子组件输出的函数。
+它接受子组件的输出作为参数，返回转换后的输出。
 
 ##### children
 
 Type: `string`
 
-Output of child components.
+输出的子组件。
 
 ## Hooks
 
 ### useInput(inputHandler, options?)
 
-This hook is used for handling user input.
-It's a more convienient alternative to using `useStdin` and listening to `data` events.
-The callback you pass to `useInput` is called for each character when user enters any input.
-However, if user pastes text and it's more than one character, the callback will be called only once and the whole string will be passed as `input`.
-You can find a full example of using `useInput` at [examples/use-input](examples/use-input/use-input.js).
+这个 Hook 用于处理用户输入。
+相较于使用 `useStdin` 和监听数据事件，这是一种更方便的选择。
+当用户有任何的输入的时候，将每个字符作为参数传入 `useInput` 的回调函数。
+但是，如果用户粘贴包含多个字符的文本，则回调将仅调用一次，并将整个字符串作为参数传入。
+你可以在 [examples/use-input](examples/use-input/use-input.js) 找到 `useInput` 的完整实例。
 
 ```jsx
 import {useInput} from 'ink';
 
 const UserInput = () => {
-	useInput((input, key) => {
-		if (input === 'q') {
-			// Exit program
-		}
+  useInput((input, key) => {
+    if (input === 'q') {
+      // Exit program
+    }
 
-		if (key.leftArrow) {
-			// Left arrow key pressed
-		}
-	});
+    if (key.leftArrow) {
+      // Left arrow key pressed
+    }
+  });
 
-	return …
+  return …
 };
 ```
 
@@ -1097,19 +1098,19 @@ const UserInput = () => {
 
 Type: `Function`
 
-The handler function that you pass to `useInput` receives two arguments:
+这一回调函数使你通过 `useInput` 获得两个参数
 
 ##### input
 
 Type: `string`
 
-The input that the program received.
+程序接收到的输入值。
 
 ##### key
 
 Type: `object`
 
-Handy information about a key that was pressed.
+关于用户按下的按键的信息。
 
 ###### key.leftArrow
 
@@ -1122,57 +1123,57 @@ Handy information about a key that was pressed.
 Type: `boolean`\
 Default: `false`
 
-If an arrow key was pressed, the corresponding property will be `true`.
-For example, if user presses left arrow key, `key.leftArrow` equals `true`.
+如果方向键被按下，则相应方向的值将被设置为 `true`.
+比如，如果用户按下左方向键，`key.leftArrow = true`。
 
 ###### key.return
 
 Type: `boolean`\
 Default: `false`
 
-Return (Enter) key was pressed.
+`Return` 或 `Enter` 键被按下。
 
 ###### key.escape
 
 Type: `boolean`\
 Default: `false`
 
-Escape key was pressed.
+`Esc` 键被按下。
 
 ###### key.ctrl
 
 Type: `boolean`\
 Default: `false`
 
-Ctrl key was pressed.
+`Ctrl` 键被按下。
 
 ###### key.shift
 
 Type: `boolean`\
 Default: `false`
 
-Shift key was pressed.
+`Shift` 键被按下。
 
 ###### key.tab
 
 Type: `boolean`\
 Default: `false`
 
-Tab key was pressed.
+`Tab` 键被按下。
 
 ###### key.backspace
 
 Type: `boolean`\
 Default: `false`
 
-Backspace key was pressed.
+`Backspace` 键被按下。
 
 ###### key.delete
 
 Type: `boolean`\
 Default: `false`
 
-Delete key was pressed.
+`Delete` 键被按下。
 
 ###### key.pageDown
 
@@ -1181,15 +1182,15 @@ Delete key was pressed.
 Type: `boolean`\
 Default: `false`
 
-If Page Up or Page Down key was pressed, the corresponding property will be `true`.
-For example, if user presses Page Down, `key.pageDown` equals `true`.
+如果翻页键被按下，则对应的值被设置为 `true`.
+比如说，用户如果按下 `PageDown` 键, `key.pageDown = true`.
 
 ###### key.meta
 
 Type: `boolean`\
 Default: `false`
 
-[Meta key](https://en.wikipedia.org/wiki/Meta_key) was pressed.
+[Meta key](https://en.wikipedia.org/wiki/Meta_key) 被按下
 
 #### options
 
@@ -1200,61 +1201,61 @@ Type: `object`
 Type: `boolean`\
 Default: `true`
 
-Enable or disable capturing of user input.
-Useful when there are multiple `useInput` hooks used at once to avoid handling the same input several times.
+启用或禁用捕获用户输入。
+当同时存在多个 `useInput` hook 时，可以通过这一设置避免重复处理同一输入。
 
 ### useApp()
 
-`useApp` is a React hook, which exposes a method to manually exit the app (unmount).
+`useApp` 暴露了显式退出（或解除挂载）应用的方法。
 
 #### exit(error?)
 
 Type: `Function`
 
-Exit (unmount) the whole Ink app.
+退出（或解除挂载）整个 Ink 应用。
 
 ##### error
 
 Type: `Error`
 
-Optional error. If passed, [`waitUntilExit`](waituntilexit) will reject with that error.
+可选错误。如果通过， [`waitUntilExit`](waituntilexit) 会拒绝该错误。
 
 ```js
 import {useApp} from 'ink';
 
 const Example = () => {
-	const {exit} = useApp();
+  const {exit} = useApp();
 
-	// Exit the app after 5 seconds
-	useEffect(() => {
-		setTimeout(() => {
-			exit();
-		}, 5000);
-	}, []);
+  // Exit the app after 5 seconds
+  useEffect(() => {
+    setTimeout(() => {
+      exit();
+    }, 5000);
+  }, []);
 
-	return …
+  return …
 };
 ```
 
 ### useStdin()
 
-`useStdin` is a React hook, which exposes stdin stream.
+`useStdin` 是用于暴露标准输入流的 hook。
 
 #### stdin
 
 Type: `stream.Readable`\
 Default: `process.stdin`
 
-Stdin stream passed to `render()` in `options.stdin` or `process.stdin` by default.
-Useful if your app needs to handle user input.
+标准输入流通过 `option.stdin` 或 `process.stdin` （默认情况下）传递给 `render()` 函数。
+如果你的 app 需要处理用户输入，这是一个很有用的 hook。
 
 ```js
 import {useStdin} from 'ink';
 
 const Example = () => {
-	const {stdin} = useStdin();
+  const {stdin} = useStdin();
 
-	return …
+  return …
 };
 ```
 
@@ -1262,20 +1263,16 @@ const Example = () => {
 
 Type: `boolean`
 
-A boolean flag determining if the current `stdin` supports `setRawMode`.
-A component using `setRawMode` might want to use `isRawModeSupported` to nicely fall back in environments where raw mode is not supported.
+一个布尔值，确定当前的 `stdin` 是否能够支持 `setRawMode` 。
+使用 `setRawMode` 的组件可能会希望使用 `isRawModeSupported` 来在不支持 raw 模式的环境中进行降级处理。
 
 ```jsx
-import {useStdin} from 'ink';
+import { useStdin } from 'ink';
 
 const Example = () => {
-	const {isRawModeSupported} = useStdin();
+  const { isRawModeSupported } = useStdin();
 
-	return isRawModeSupported ? (
-		<MyInputComponent />
-	) : (
-		<MyComponentThatDoesntUseInput />
-	);
+  return isRawModeSupported ? <MyInputComponent /> : <MyComponentThatDoesntUseInput />;
 };
 ```
 
@@ -1287,32 +1284,32 @@ Type: `function`
 
 Type: `boolean`
 
-See [`setRawMode`](https://nodejs.org/api/tty.html#tty_readstream_setrawmode_mode).
-Ink exposes this function to be able to handle <kbd>Ctrl</kbd>+<kbd>C</kbd>, that's why you should use Ink's `setRawMode` instead of `process.stdin.setRawMode`.
+参考 [`setRawMode`](https://nodejs.org/api/tty.html#tty_readstream_setrawmode_mode).
+Ink 暴露这个方法用于处理 <kbd>Ctrl</kbd>+<kbd>C</kbd>，这也是为什么你应该使用 Ink 的 `setRawMode` 而不是 `process.stdin.setRawMode`。
 
-**Warning:** This function will throw unless the current `stdin` supports `setRawMode`. Use [`isRawModeSupported`](#israwmodesupported) to detect `setRawMode` support.
+**警告：** 该函数将被舍弃除非当前的 `stdin` 支持 `setRawMode` 。使用 [`isRawModeSupported`](#israwmodesupported) 来检测 `setRawMode` 的支持情况。
 
 ```js
 import {useStdin} from 'ink';
 
 const Example = () => {
-	const {setRawMode} = useStdin();
+  const {setRawMode} = useStdin();
 
-	useEffect(() => {
-		setRawMode(true);
+  useEffect(() => {
+    setRawMode(true);
 
-		return () => {
-			setRawMode(false);
-		};
-	});
+    return () => {
+      setRawMode(false);
+    };
+  });
 
-	return …
+  return …
 };
 ```
 
 ### useStdout()
 
-`useStdout` is a React hook, which exposes stdout stream, where Ink renders your app.
+`useStdout` 是用来暴露标准输入流的 hook ， Ink 在标准输出流中渲染你的 app 。
 
 #### stdout
 
@@ -1323,211 +1320,210 @@ Default: `process.stdout`
 import {useStdout} from 'ink';
 
 const Example = () => {
-	const {stdout} = useStdout;
+  const {stdout} = useStdout;
 
-	return …
+  return …
 };
 ```
 
 #### write(data)
 
-Write any string to stdout, while preserving Ink's output.
-It's useful when you want to display some external information outside of Ink's rendering and ensure there's no conflict between the two.
-It's similar to `<Static>`, except it can't accept components, it only works with strings.
+将任意字符写入标准输出流，同时保留 Ink 的输出。
+当你要在 Ink 的渲染之外显示一些外部信息且确保两者之间不存在冲突时，你将使用到这个方法。
+它于 `<Static>` 类似，但是它不能接受组件，而仅适用于字符串。
 
 ##### data
 
 Type: `string`
 
-Data to write to stdout.
+要写到标准输出流的数据。
 
 ```js
 import {useStdout} from 'ink';
 
 const Example = () => {
-	const {write} = useStdout();
+  const {write} = useStdout();
 
-	useEffect(() => {
-		// Write a single message to stdout, above Ink's output
-		write('Hello from Ink to stdout\n');
-	}, []);
+  useEffect(() => {
+    // Write a single message to stdout, above Ink's output
+    write('Hello from Ink to stdout\n');
+  }, []);
 
-	return …
+  return …
 };
 ```
 
-See additional usage example in [examples/use-stdout](examples/use-stdout/use-stdout.js).
+在 [examples/use-stdout](examples/use-stdout/use-stdout.js) 查看额外的用例。
 
 ### useStderr()
 
-`useStderr` is a React hook, which exposes stderr stream.
+`useStderr` 是暴露标准错误流的 hook 。
 
 #### stderr
 
 Type: `stream.Writable`\
 Default: `process.stderr`
 
-Stderr stream.
+标准错误流。
 
 ```js
 import {useStderr} from 'ink';
 
 const Example = () => {
-	const {stderr} = useStderr();
+  const {stderr} = useStderr();
 
-	return …
+  return …
 };
 ```
 
 #### write(data)
 
-Write any string to stderr, while preserving Ink's output.
-
-It's useful when you want to display some external information outside of Ink's rendering and ensure there's no conflict between the two.
-It's similar to `<Static>`, except it can't accept components, it only works with strings.
+将任何字符串写入标准错误流，同时保留 Ink 本身的输出。
+当你要在 Ink 的渲染之外显示一些外部信息且确保两者之间不存在冲突时，你将使用到这个方法。
+它于 `<Static>` 类似，但是它不能接受组件，而仅适用于字符串。
 
 ##### data
 
 Type: `string`
 
-Data to write to stderr.
+要写入标准错误流的数据。
 
 ```js
 import {useStderr} from 'ink';
 
 const Example = () => {
-	const {write} = useStderr();
+  const {write} = useStderr();
 
-	useEffect(() => {
-		// Write a single message to stderr, above Ink's output
-		write('Hello from Ink to stderr\n');
-	}, []);
+  useEffect(() => {
+    // Write a single message to stderr, above Ink's output
+    write('Hello from Ink to stderr\n');
+  }, []);
 
-	return …
+  return …
 };
 ```
 
 ### useFocus(options?)
 
-Component that uses `useFocus` hook becomes "focusable" to Ink, so when user presses <kbd>Tab</kbd>, Ink will switch focus to this component.
-If there are multiple components that execute `useFocus` hook, focus will be given to them in the order that these components are rendered in.
-This hook returns an object with `isFocused` boolean property, which determines if this component is focused or not.
+使用 `useFocus` hook 的组件将成为可聚焦的组件。当用户按下 <kbd>Tab</kbd> 键时，Ink 会将焦点切换到该组件。
+如果有多个执行 `useFocus` 挂钩的组件，将按照呈现这些组件的顺序将焦点给予它们。
+该 hook 返回一个具有 `isFocused` 属性（布尔值）的对象，该对象确定此组件是否处于焦点状态。
 
-#### options
+#### 选项
 
 ##### autoFocus
 
 Type: `boolean`\
 Default: `false`
 
-Auto focus this component, if there's no active (focused) component right now.
+若当前没有活动（被聚焦）的组件，则自动聚焦该组件。
 
 ##### isActive
 
 Type: `boolean`\
 Default: `true`
 
-Enable or disable this component's focus, while still maintaining its position in the list of focusable components.
-This is useful for inputs that are temporarily disabled.
+是否启用此组件的可聚焦状态，同时保持其在可聚焦组件列表中的位置。
+这一属性对于临时禁用组件的可聚焦状态很有用。
 
 ```jsx
-import {render, useFocus, Text} from 'ink';
+import { render, useFocus, Text } from 'ink';
 
 const Example = () => {
-	const {isFocused} = useFocus();
+  const { isFocused } = useFocus();
 
-	return <Text>{isFocused ? 'I am focused' : 'I am not focused'}</Text>;
+  return <Text>{isFocused ? 'I am focused' : 'I am not focused'}</Text>;
 };
 
 render(<Example />);
 ```
 
-See example in [examples/use-focus](examples/use-focus/use-focus.js).
+在 [examples/use-focus](examples/use-focus/use-focus.js) 查看更多示例。
 
 ### useFocusManager()
 
-This hook exposes methods to enable or disable focus management for all components or manually switch focus to next or previous components.
+这个 hook 暴露四个方法，用于启用或禁用所有组件的可聚焦状态，以及手动将焦点切换到上一个组件或下一个组件。
 
 #### enableFocus()
 
-Enable focus management for all components.
+开启所有组件的聚焦状态。
 
-**Note:** You don't need to call this method manually, unless you've disabled focus management. Focus management is enabled by default.
+**注意：** 除非你已禁用了组件的可聚焦状态，否则无需手动调用此方法。默认情况下所有组件都是可聚焦的。
 
 ```js
 import {useFocusManager} from 'ink';
 
 const Example = () => {
-	const {enableFocus} = useFocusManager();
+  const {enableFocus} = useFocusManager();
 
-	useEffect(() => {
-		enableFocus();
-	}, []);
+  useEffect(() => {
+    enableFocus();
+  }, []);
 
-	return …
+  return …
 };
 ```
 
 #### disableFocus()
 
-Disable focus management for all components.
-Currently active component (if there's one) will lose its focus.
+禁用所有组件的可聚焦状态。
+如果有已经聚焦的组件，那么调用该方法是那些组件将失去聚焦状态。
 
 ```js
 import {useFocusManager} from 'ink';
 
 const Example = () => {
-	const {disableFocus} = useFocusManager();
+  const {disableFocus} = useFocusManager();
 
-	useEffect(() => {
-		disableFocus();
-	}, []);
+  useEffect(() => {
+    disableFocus();
+  }, []);
 
-	return …
+  return …
 };
 ```
 
 #### focusNext()
 
-Switch focus to the next focusable component.
-If there's no active component right now, focus will be given to the first focusable component.
-If active component is the last in the list of focusable components, focus will be switched to the first component.
+将焦点切换到下一个可聚焦的组件。
+如果当前没有可聚焦的组件，则将焦点放在第一个可聚焦的组件上。
+如果当前焦点所在组件是可聚焦组件列表中的最后一个组件，则将焦点切换到第一个组件。
 
-**Note:** Ink calls this method when user presses <kbd>Tab</kbd>.
+**注意：** 当按下 <kbd>Tab</kbd> 时，Ink 会调用该方法。
 
 ```js
 import {useFocusManager} from 'ink';
 
 const Example = () => {
-	const {focusNext} = useFocusManager();
+  const {focusNext} = useFocusManager();
 
-	useEffect(() => {
-		focusNext();
-	}, []);
+  useEffect(() => {
+    focusNext();
+  }, []);
 
-	return …
+  return …
 };
 ```
 
 #### focusPrevious()
 
-Switch focus to the previous focusable component.
-If there's no active component right now, focus will be given to the first focusable component.
-If active component is the first in the list of focusable components, focus will be switched to the last component.
+将焦点切换到上一个可聚焦的组件。
+如果当前没有可聚焦的组件，则将焦点放在第一个可聚焦的组件上。
+如果当前焦点所在组件是可聚焦组件列表的第一个组件，则将焦点切换到列表的最后一个组件。
 
-**Note:** Ink calls this method when user presses <kbd>Shift</kbd>+<kbd>Tab</kbd>.
+**注意：** 当按下 <kbd>Shift</kbd>+<kbd>Tab</kbd> 时，Ink 会调用该方法。
 
 ```js
 import {useFocusManager} from 'ink';
 
 const Example = () => {
-	const {focusPrevious} = useFocusManager();
+  const {focusPrevious} = useFocusManager();
 
-	useEffect(() => {
-		focusPrevious();
-	}, []);
+  useEffect(() => {
+    focusPrevious();
+  }, []);
 
-	return …
+  return …
 };
 ```
 
@@ -1537,7 +1533,7 @@ const Example = () => {
 
 Returns: [`Instance`](#instance)
 
-Mount a component and render the output.
+挂载组件并渲染输出。
 
 ##### tree
 
@@ -1552,48 +1548,48 @@ Type: `object`
 Type: `stream.Writable`\
 Default: `process.stdout`
 
-Output stream where app will be rendered.
+用于渲染 app 的输出流。
 
 ###### stdin
 
 Type: `stream.Readable`\
 Default: `process.stdin`
 
-Input stream where app will listen for input.
+App 将要监听的输入流。
 
 ###### exitOnCtrlC
 
 Type: `boolean`\
 Default: `true`
 
-Configure whether Ink should listen to Ctrl+C keyboard input and exit the app.
-This is needed in case `process.stdin` is in [raw mode](https://nodejs.org/api/tty.html#tty_readstream_setrawmode_mode), because then Ctrl+C is ignored by default and process is expected to handle it manually.
+配置 Ink 是否应监听 <kbd>Ctrl</kbd> + <kbd>C</kbd> 来退出应用程序。
+如果 `process.stdin` 是处在 [原始模式](https://nodejs.org/api/tty.html#tty_readstream_setrawmode_mode) 下，则需要设置它；因为默认情况下会忽略 <kbd>Ctrl</kbd> + <kbd>C</kbd> ，并期望进程手动处理它。
 
 ###### patchConsole
 
 Type: `boolean`\
 Default: `true`
 
-Patch console methods to ensure console output doesn't mix with Ink output.
-When any of `console.*` methods are called (like `console.log()`), Ink intercepts their output, clears main output, renders output from the console method and then rerenders main output again.
-That way both are visible and are not overlapping each other.
+拼接控制台的方法，以确保控制台输出不会和 Ink 输出混合。
+当任何 `console.*` 方法被调用时(比如 `console.log()`)，Ink 会截获它们的输出，清除主输出流，渲染 console 方法的输出内容，然后重渲染主输出流。
+这样二者都是可见且彼此不会重叠的。
 
-This functionality is powered by [patch-console](https://github.com/vadimdemedes/patch-console), so if you need to disable Ink's interception of output but want to build something custom, you can use it.
+此功能基于 [patch-console](https://github.com/vadimdemedes/patch-console) 实现， 所以如果你需要禁用 Ink 的默认输出拦截功能，而进行自定义，可以使用它实现。
 
 ###### debug
 
 Type: `boolean`\
 Default: `false`
 
-If `true`, each update will be rendered as a separate output, without replacing the previous one.
+如果设置为 `true` ，则每次更新都将以单独的输出呈现，而非替换先前的输出。
 
 #### Instance
 
-This is the object that `render()` returns.
+这是 `render()` 函数返回的对象。
 
 ##### rerender(tree)
 
-Replace previous root node with a new one or update props of the current root node.
+用新的根节点替换上一个节点，或更新当前根节点的一些属性。
 
 ###### tree
 
@@ -1601,29 +1597,29 @@ Type: `ReactElement`
 
 ```jsx
 // Update props of the root node
-const {rerender} = render(<Counter count={1} />);
+const { rerender } = render(<Counter count={1} />);
 rerender(<Counter count={2} />);
 
 // Replace root node
-const {rerender} = render(<OldCounter />);
+const { rerender } = render(<OldCounter />);
 rerender(<NewCounter />);
 ```
 
 ##### unmount()
 
-Manually unmount the whole Ink app.
+手动卸载整个 Ink 应用。
 
 ```jsx
-const {unmount} = render(<MyApp />);
+const { unmount } = render(<MyApp />);
 unmount();
 ```
 
 ##### waitUntilExit()
 
-Returns a promise, which resolves when app is unmounted.
+返回一个 `promise` ，其在应用卸载(unmounted)时 `resolve` 。
 
 ```jsx
-const {unmount, waitUntilExit} = render(<MyApp />);
+const { unmount, waitUntilExit } = render(<MyApp />);
 
 setTimeout(unmount, 1000);
 
@@ -1632,46 +1628,47 @@ await waitUntilExit(); // resolves after `unmount()` is called
 
 ##### clear()
 
-Clear output.
+清空输出流。
 
 ```jsx
-const {clear} = render(<MyApp />);
+const { clear } = render(<MyApp />);
 clear();
 ```
 
 #### measureElement(ref)
 
-Measure the dimensions of a particular `<Box>` element.
-It returns an object with `width` and `height` properties.
-This function is useful when your component needs to know the amount of available space it has. You could use it when you need to change the layout based on the length of its content.
+测量特定 `<Box>` 元素的尺寸。
+其返回一个具有 `width` 和 `height` 属性的对象。
+当组件需要知道其拥有的可用空间量时，可以使用此方法获得。
+当你需要根据其暖色的长度改变布局时，可以使用该方法。
 
-**Note:** `measureElement()` returns correct results only after the initial render, when layout has been calculated. Until then, `width` and `height` equal to zero. It's recommended to call `measureElement()` in a `useEffect` hook, which fires after the component has rendered.
+**注意：** `measureElement()` 只有在初始渲染结束后才能够计算布局返回正确的结果。在那之前， `width` 和 `height` 被设置为 0。建议在 `useEffect` 中调用 `measureElement()` ，确保该方法在组件渲染完成后才会触发。
 
 ##### ref
 
 Type: `MutableRef`
 
-A reference to a `<Box>` element captured with a `ref` property.
-See [Refs](https://reactjs.org/docs/refs-and-the-dom.html) for more information on how to capture references.
+对使用 `ref` 属性的 `<Box>` 元素的引用。
+查看 [Refs](https://reactjs.org/docs/refs-and-the-dom.html) 来获得更多信息。
 
 ```jsx
-import {render, measureElement, Box, Text} from 'ink';
+import { render, measureElement, Box, Text } from 'ink';
 
 const Example = () => {
-	const ref = useRef();
+  const ref = useRef();
 
-	useEffect(() => {
-		const {width, height} = measureElement(ref.current);
-		// width = 100, height = 1
-	}, []);
+  useEffect(() => {
+    const { width, height } = measureElement(ref.current);
+    // width = 100, height = 1
+  }, []);
 
-	return (
-		<Box width={100}>
-			<Box ref={ref}>
-				<Text>This box will stretch to 100 width</Text>
-			</Box>
-		</Box>
-	);
+  return (
+    <Box width={100}>
+      <Box ref={ref}>
+        <Text>This box will stretch to 100 width</Text>
+      </Box>
+    </Box>
+  );
 };
 
 render(<Example />);
@@ -1679,63 +1676,63 @@ render(<Example />);
 
 ## Testing
 
-Ink components are simple to test with [ink-testing-library](https://github.com/vadimdemedes/ink-testing-library).
-Here's a simple example that checks how component is rendered:
+Ink 组件使用 [ink-testing-library](https://github.com/vadimdemedes/ink-testing-library) 既可以方便地进行测试。
+这是一个对组件进行测试的简单示例。
 
 ```jsx
 import React from 'react';
-import {Text} from 'ink';
-import {render} from 'ink-testing-library';
+import { Text } from 'ink';
+import { render } from 'ink-testing-library';
 
 const Test = () => <Text>Hello World</Text>;
-const {lastFrame} = render(<Test />);
+const { lastFrame } = render(<Test />);
 
 lastFrame() === 'Hello World'; //=> true
 ```
 
-Check out [ink-testing-library](https://github.com/vadimdemedes/ink-testing-library) for more examples and full documentation.
+查看 [ink-testing-library](https://github.com/vadimdemedes/ink-testing-library) 以获得更多例子和完整的文档。
 
-## Using React Devtools
+## 使用 React 开发工具
 
-![](media/devtools.jpg)
+![开发工具](media/devtools.jpg)
 
-Ink supports [React Devtools](https://github.com/facebook/react/tree/master/packages/react-devtools) out-of-the-box.
-To enable integration with React Devtools in your Ink-based CLI, run it with `DEV=true` environment variable:
+Ink 为 [React Devtools](https://github.com/facebook/react/tree/master/packages/react-devtools) 提供了开箱即用的支持。
+要在基于 Ink 的 CLI 中与 React Devtools 集成，请使用环境变量 `DEV=true` ：
 
 ```
 $ DEV=true my-cli
 ```
 
-Then, start React Devtools itself:
+然后，打开 React Devtools。
 
 ```
 $ npx react-devtools
 ```
 
-After it starts up, you should see the component tree of your CLI.
-You can even inspect and change the props of components, and see the results immediatelly in the CLI, without restarting it.
+当其启动后，你应该能看到 CLI 的组件树。
+你甚至能够检查和更改组件的属性，并在 CLI 中立即查看结果而无需重启应用。
 
-**Note**: You must manually quit your CLI via <kbd>Ctrl</kbd>+<kbd>C</kbd> after you're done testing.
+**注意：** 调试完成后，你必须通过 <kbd>Ctrl</kbd> + <kbd>C</kbd> 手动退出 CLI。
 
-## Useful Components
+## 有用的组件
 
-- [ink-text-input](https://github.com/vadimdemedes/ink-text-input) - Text input.
-- [ink-spinner](https://github.com/vadimdemedes/ink-spinner) - Spinner.
-- [ink-select-input](https://github.com/vadimdemedes/ink-select-input) - Select (dropdown) input.
-- [ink-link](https://github.com/sindresorhus/ink-link) - Link component.
-- [ink-gradient](https://github.com/sindresorhus/ink-gradient) - Gradient color component.
-- [ink-big-text](https://github.com/sindresorhus/ink-big-text) - Awesome text component.
-- [ink-image](https://github.com/kevva/ink-image) - Display images inside the terminal.
-- [ink-tab](https://github.com/jdeniau/ink-tab) - Tab component.
-- [ink-color-pipe](https://github.com/LitoMore/ink-color-pipe) - Create color text with simpler style strings in Ink.
-- [ink-multi-select](https://github.com/karaggeorge/ink-multi-select) - Select one or more values from a list
-- [ink-divider](https://github.com/JureSotosek/ink-divider) - A divider component.
-- [ink-progress-bar](https://github.com/brigand/ink-progress-bar) - Configurable component for rendering progress bars.
-- [ink-table](https://github.com/maticzav/ink-table) - Table component.
-- [ink-ascii](https://github.com/hexrcs/ink-ascii) - Awesome text component with more font choices, based on Figlet.
-- [ink-markdown](https://github.com/cameronhunter/ink-markdown) - Render syntax highlighted Markdown.
-- [ink-quicksearch-input](https://github.com/Eximchain/ink-quicksearch-input) - Select component with fast quicksearch-like navigation.
-- [ink-confirm-input](https://github.com/kevva/ink-confirm-input) - Yes/No confirmation input.
+- [ink-text-input](https://github.com/vadimdemedes/ink-text-input) - 文本输入 ![文本输入](media/ink-text-input.gif)
+- [ink-spinner](https://github.com/vadimdemedes/ink-spinner) - 加载中 ![加载中](media/ink-spinner.gif)
+- [ink-select-input](https://github.com/vadimdemedes/ink-select-input) - 选择输入框 ![选择输入框](media/ink-select-input.gif)
+- [ink-link](https://github.com/sindresorhus/ink-link) - 链接 ![链接](media/ink-link.png)
+- [ink-gradient](https://github.com/sindresorhus/ink-gradient) - 彩色梯形组件 ![彩色梯形](media/ink-gradient.png)
+- [ink-big-text](https://github.com/sindresorhus/ink-big-text) - 大文本 ![大文本](media/ink-big-text.png)
+- [ink-image](https://github.com/kevva/ink-image) - 在终端中显示图片 ![ink-image](media/ink-image.png)
+- [ink-tab](https://github.com/jdeniau/ink-tab) - Tab 组件. ![ink-tab](media/ink-tab.svg)
+- [ink-color-pipe](https://github.com/LitoMore/ink-color-pipe) - 创建带有简单样式的彩色文字 ![ink-color-pipe](media/ink-color-pipe.svg)
+- [ink-multi-select](https://github.com/karaggeorge/ink-multi-select) - 从列表中选择一个或多个选项 ![ink-multi-select](media/ink-multi-select.gif)
+- [ink-divider](https://github.com/JureSotosek/ink-divider) - 分割组件 ![ink-divider](media/ink-divider.png)
+- [ink-progress-bar](https://github.com/brigand/ink-progress-bar) - 进度条
+- [ink-table](https://github.com/maticzav/ink-table) - 表格 ![ink-table](media/ink-table.png)
+- [ink-ascii](https://github.com/hexrcs/ink-ascii) - 基于 Figlet 的文本组件，拥有更多字体选择 ![ink-ascii](media/ink-ascii.png)
+- [ink-markdown](https://github.com/cameronhunter/ink-markdown) - 渲染带有语法高亮的 markdown ![ink-markdown](media/ink-markdown.png)
+- [ink-quicksearch-input](https://github.com/Eximchain/ink-quicksearch-input) - 带有自动补全功能的选择组件
+- [ink-confirm-input](https://github.com/kevva/ink-confirm-input) - Yes/No 确认组件。
 
 ## Useful Hooks
 

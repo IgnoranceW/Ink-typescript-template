@@ -93,28 +93,34 @@ render(<Counter />);
 
 ## 目录
 
-- [快速开始](#getting-started)
-- [组件](#components)
-  - [`<Text>`](#text)
-  - [`<Box>`](#box)
-  - [`<Newline>`](#newline)
-  - [`<Spacer>`](#spacer)
-  - [`<Static>`](#static)
-  - [`<Transform>`](#transform)
-- [Hooks](#hooks)
-  - [`useInput`](#useinputinputhandler-options)
-  - [`useApp`](#useapp)
-  - [`useStdin`](#usestdin)
-  - [`useStdout`](#usestdout)
-  - [`useStderr`](#usestderr)
-  - [`useFocus`](#usefocusoptions)
-  - [`useFocusManager`](#usefocusmanager)
-- [API](#api)
-- [测试](#testing)
-- [使用 React 开发工具](#using-react-devtools)
-- [有用的组件](#useful-components)
-- [有用的 Hooks](#useful-hooks)
-- [用例](#examples)
+- [Ink 官方文档翻译](#ink-官方文档翻译)
+  - [安装](#安装)
+  - [用例](#用例)
+  - [谁在使用 Ink?](#谁在使用-ink)
+  - [目录](#目录)
+  - [快速开始](#快速开始)
+  - [组件](#组件)
+    - [`<Text>`](#text)
+    - [`<Box>`](#box)
+    - [`<Newline>`](#newline)
+    - [`<Spacer>`](#spacer)
+    - [`<Static>`](#static)
+    - [`<Transform>`](#transform)
+  - [Hooks](#hooks)
+    - [useInput(inputHandler, options?)](#useinputinputhandler-options)
+    - [useApp()](#useapp)
+    - [useStdin()](#usestdin)
+    - [useStdout()](#usestdout)
+    - [useStderr()](#usestderr)
+    - [useFocus(options?)](#usefocusoptions)
+    - [useFocusManager()](#usefocusmanager)
+  - [API](#api)
+  - [测试](#测试)
+  - [使用 React 开发工具](#使用react开发工具)
+  - [有用的组件](#有用的组件)
+  - [Useful Hooks](#useful-hooks)
+  - [Examples](#examples)
+  - [Maintainers](#maintainers)
 
 ## 快速开始
 
@@ -1674,7 +1680,7 @@ const Example = () => {
 render(<Example />);
 ```
 
-## Testing
+## 测试
 
 Ink 组件使用 [ink-testing-library](https://github.com/vadimdemedes/ink-testing-library) 既可以方便地进行测试。
 这是一个对组件进行测试的简单示例。
